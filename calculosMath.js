@@ -8,18 +8,19 @@ CalculosMath.esImpar = function esImpar(lista) {
     return lista.length % 2;
 }
 
-CalculosMath.calcularMediana = function calcularMediana(lista) {
-    const listaEsPar = esPar(lista);
+CalculosMath.calcularMediana = function calcularMediana(listaDesordenada) {
+    const lista = CalculosMath.ordenarLista(listaDesordenada);
+    const listaEsPar = CalculosMath.esPar(lista);
     
     if (listaEsPar) {
-        // ordenando el array, en dado caso de que este desordenado:
-        const listaOrdenada = lista.sort((a,b)=>a-b);
-        console.log(listaOrdenada);
+        const indexMitad1ListaPar = (lista.length / 2)-1;
+        const indexMitad2ListaPar = lista.length / 2;
+        const listaMitades = [];
+        listaMitades.push(lista[indexMitad1ListaPar]);
+        listaMitades.push(lista[indexMitad2ListaPar]);
 
-        const posicionAbajoPar = Math.floor(lista.length / 2);
-        const posicionArribaPar = Math.floor(lista.length / 2) + 1;
-        const medianaListaPar = (lista[posicionAbajoPar] + lista[posicionArribaPar]) / 2;
-        console.log(medianaListaPar)
+        const medianaListaPar = CalculosMath.calcularPromedio(listaMitades);
+        return medianaListaPar;
 
     } else {
         
@@ -27,6 +28,7 @@ CalculosMath.calcularMediana = function calcularMediana(lista) {
         const medianaListaImpar = lista[posicionElementoImpar];
         console.log(posicionElementoImpar);
         console.log(medianaListaImpar);
+        return medianaListaImpar;
     }
 }
 
