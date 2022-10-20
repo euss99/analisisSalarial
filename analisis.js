@@ -71,3 +71,15 @@ for (persona of salarios) {
         empresas[trabajo.empresa][trabajo.year].push(trabajo.salario);
     }
 }
+
+function medianaEmpresasYear(empresa, year) {
+    if (!empresas[empresa]) {
+        console.warn("La empresa no existe.");
+    } else if (!empresas[empresa][year]) {
+        console.warn("La empresa no dio salarios ese año.")
+    } else {
+        const yearSalario = empresas[empresa][year];
+        console.log(yearSalario);
+        return CalculosMath.calcularMediana(yearSalario);
+    }
+}

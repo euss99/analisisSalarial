@@ -69,7 +69,7 @@ CalculosMath.calcularPromedio = function calcularPromedio(array) {
     
     const promedioArray = sumaLista / array.length;
 
-    console.log(promedioArray);
+    return promedioArray;
 }
 
 CalculosMath.ordenarLista = function ordenarLista(listaDesordenada) {
