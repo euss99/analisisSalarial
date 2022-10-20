@@ -1,7 +1,4 @@
-// Análisis personal para Juanita
-
 //Creando una función para buscar a cualquier persona en la lista de salario.
-const personaEnBuesqueda = "Juanita";
 
 function encontrarPersona(personaEnBuesqueda) {
     const persona = salarios.find((persona) => {
