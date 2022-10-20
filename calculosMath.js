@@ -26,8 +26,6 @@ CalculosMath.calcularMediana = function calcularMediana(listaDesordenada) {
         
         const posicionElementoImpar = Math.floor(lista.length / 2); // Posición en el array del elemeto impar.
         const medianaListaImpar = lista[posicionElementoImpar];
-        console.log(posicionElementoImpar);
-        console.log(medianaListaImpar);
         return medianaListaImpar;
     }
 }

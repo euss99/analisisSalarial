@@ -19,3 +19,26 @@ function medianaPorPersona(nombrePersona) {
 
     return medianaSalario;
 }
+
+function proyeccionSalarios(nombrePersona) {
+    const trabajos = encontrarPersona(nombrePersona).trabajos;
+
+    let porcentajesCrecimiento = [];
+
+    // El ciclo for empieza desde 1 porque queremos saber desde su primer sueldo y no cuando no ganaba nada.
+    for (let i = 1; i < trabajos.length; i++) {
+        const salarioActual = trabajos[i].salario;
+        const salarioPasado = trabajos[i-1].salario;
+
+        const crecimientoSalario = salarioActual - salarioPasado;
+        const porcentajeCrecimiento = crecimientoSalario / salarioPasado;
+        porcentajesCrecimiento.push(porcentajeCrecimiento);
+    }
+    const medianaPorcentajesCrecimiento = CalculosMath.calcularMediana(porcentajesCrecimiento);
+
+    const ultimoSalario = trabajos[trabajos.length - 1].salario;
+    const aumentoDeSalario = ultimoSalario * medianaPorcentajesCrecimiento;
+    const nuevoSalario = ultimoSalario + aumentoDeSalario;
+
+    return Math.floor(nuevoSalario); // Redondeando el salario.
+}
