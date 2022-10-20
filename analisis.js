@@ -1,5 +1,5 @@
+/* Análisis salarial */
 //Creando una función para buscar a cualquier persona en la lista de salario.
-
 function encontrarPersona(personaEnBuesqueda) {
     const persona = salarios.find((persona) => {
         return persona.name == personaEnBuesqueda;
@@ -41,4 +41,33 @@ function proyeccionSalarios(nombrePersona) {
     const nuevoSalario = ultimoSalario + aumentoDeSalario;
 
     return Math.floor(nuevoSalario); // Redondeando el salario.
+}
+
+/* Análisis empresarial */
+// Creando una función para poder obtener un objeto con las diferentes empresas y estas empresas serán un objeto donde tendran dentro los diferentes años en que los trabajadores ha ganado un sueldo, ejemplo:
+/* {
+    Industrias Mokepon: {
+        2018: [salario, salario, ...]
+        2019
+    },
+    Industrias Mokepon: {},
+    Freelance: {},
+    ...
+} */
+const empresas = {};
+//Recorriendo el arreglo de salarios.
+for (persona of salarios) {
+    // Por cada persona en el arreglo de salarios, se esta recorriendo cada uno de los trabajos que tuvo la persona.
+    for (trabajo of persona.trabajos) {
+        // Se está haciendo un nuevo objeto de "empresas" que tenga una propiedad por cada distinta empresa.
+        if (!empresas[trabajo.empresa]) {
+            empresas[trabajo.empresa] = {};
+        }
+        // Por cada distinta empresa, se esta creando una propiedad con el año en la que esa empresa tuvo empleados recibiendo un salario.
+        if (!empresas[trabajo.empresa][trabajo.year]) {
+            empresas[trabajo.empresa][trabajo.year] = [];
+        }
+        // Por cada año, se esta agregando un array con los distintos salarios.
+        empresas[trabajo.empresa][trabajo.year].push(trabajo.salario);
+    }
 }
