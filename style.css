@@ -1,0 +1,66 @@
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+}
+.information-section {
+    width: 100%;
+    height: auto;
+}
+.information-section_AS h2 {
+    margin: 0;
+    padding: 15px;
+    font-size: 26px;
+}
+.information-section_AS .title {
+    margin: 0 15px 10px 15px;
+    font-size: 20px;
+    font-weight: 500;
+}
+.information-section_AS p {
+    margin: 0 15px 10px 15px;
+    font-weight: 300;
+}
+.information-section_IP .title {
+    margin: 20px 10px 15px 15px;
+    font-size: 20px;
+    font-weight: 500;
+}
+.information-section_IP p {
+    margin: 0 15px 10px 15px;
+    font-weight: 300;
+}
+.main-section p:nth-child(1) {
+    margin: 20px 15px 10px 15px;
+    font-size: 20px;
+    font-weight: 500;
+}
+.main-section p {
+    margin: 0 15px 10px 15px;
+    font-weight: 300;
+}
+.main-section_table {
+    display: grid;
+    grid-template-columns: 400px 400px 400px;
+    grid-template-rows: auto;
+    grid-gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    margin: 15px 0;
+}
+.table-section {
+    width: 400px;
+
+}
+table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+th, td {
+    border: solid 1px black;
+    padding: 5px;
+}
+thead {
+    background-color: black;
+    color: white;
+}
