@@ -58,7 +58,7 @@ CalculosMath.calcularModa = function calcularModa(lista) {
 
     console.log("La moda es: " + moda);
 }
-
+CalculosMath.ordenarLista
 CalculosMath.calcularPromedio = function calcularPromedio(array) {
 
     const sumaArray = (valorAcumulado, nuevoValor) => {
