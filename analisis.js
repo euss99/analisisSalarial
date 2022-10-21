@@ -1,17 +1,14 @@
 /* Análisis salarial */
 //Creando una función para buscar a cualquier persona en la lista de salario.
 function encontrarPersona(personaEnBuesqueda) {
-    const persona = salarios.find((persona) => {
-        return persona.name == personaEnBuesqueda;
-    });
-
-    return persona;
+    return salarios.find(persona => persona.name == personaEnBuesqueda
+    );
 }
 
 function medianaPorPersona(nombrePersona) {
     const trabajos = encontrarPersona(nombrePersona).trabajos; // Entrando a la parte de trabajos del array.
 
-    const salarios = trabajos.map((elemento) => {
+    const salarios = trabajos.map( function(elemento) {
         return elemento.salario;
     }); // Nos ayudará a recorrer todos los elementos de un array y crear otro array apartir de ese array. 
 
@@ -20,7 +17,7 @@ function medianaPorPersona(nombrePersona) {
     return medianaSalario;
 }
 
-function proyeccionSalarios(nombrePersona) {
+function proyeccionIndividualSalarios(nombrePersona) {
     const trabajos = encontrarPersona(nombrePersona).trabajos;
 
     let porcentajesCrecimiento = [];
@@ -79,7 +76,71 @@ function medianaEmpresasYear(empresa, year) {
         console.warn("La empresa no dio salarios ese año.")
     } else {
         const yearSalario = empresas[empresa][year];
-        console.log(yearSalario);
         return CalculosMath.calcularMediana(yearSalario);
     }
+}
+
+function proyeccionPorEmpresaSalarial(empresa) {
+    if (!empresas[empresa]) {
+        console.warn("La empresa no existe.");
+    } else {
+        const empresaYears = Object.keys(empresas[empresa]);
+        // console.log(empresaYears);
+        const listaMedianaYears = empresaYears.map((year) => {
+            return medianaEmpresasYear(empresa, year);
+        }); // Array de medianas de salarios por año.
+        
+        let porcentajesCrecimiento = [];
+
+        for (let i = 1; i < listaMedianaYears.length; i++) {
+            const salarioActual = listaMedianaYears[i];
+            const salarioPasado = listaMedianaYears[i-1];
+    
+            const crecimientoSalario = salarioActual - salarioPasado;
+            const porcentajeCrecimiento = crecimientoSalario / salarioPasado;
+            porcentajesCrecimiento.push(porcentajeCrecimiento);
+        }
+        const medianaPorcentajesCrecimiento = CalculosMath.calcularMediana(porcentajesCrecimiento);
+    
+        const ultimaMedianaDeSalarios = listaMedianaYears[listaMedianaYears.length - 1];
+        const aumento = ultimaMedianaDeSalarios * medianaPorcentajesCrecimiento;
+        const nuevaMedianaDeSalario = ultimaMedianaDeSalarios + aumento;
+    
+        return Math.floor(nuevaMedianaDeSalario);
+    }
+}
+
+/* Análisis general */
+function medianaGeneral() {
+    const listaMedianas = salarios.map(
+        persona => medianaPorPersona(persona.name)
+    );
+
+    const mediana = CalculosMath.calcularMediana(listaMedianas);
+    
+    return mediana; // Mediana general de todos los trabajadores.
+}
+
+function medianaTop10() {
+    const listaMedianas = salarios.map(
+        persona => medianaPorPersona(persona.name)
+    );
+    
+    const medianasOrdenadas = CalculosMath.ordenarLista(listaMedianas);
+    
+    const cantidad = medianasOrdenadas.length / 10; // 2
+    const limite = medianasOrdenadas.length - cantidad; // 18
+
+    // Slice es un métodos del array que me permiten agarrar un arreglo (Los copia y pega en otro array) y trabajar con cierta cantidad de esos arreglos, eligiendo de donde empiece y donde termina el array. NO AFECTA AL ARRAY.
+
+    // El método Splice es muy parecido al slice pero la diferencia es que con esta quitariamos del array con el que queremos trabajar la cantidad de elementos que deseamos. AFECTA AL ARRAY.
+
+    const top10porciento = medianasOrdenadas.slice(limite, medianasOrdenadas.length); // En este caso gracias al slice trabajar en un rango de [19, 20] del array.
+
+    const medianaTop10 = CalculosMath.calcularMediana(top10porciento);
+
+    return medianaTop10;
+
+    
+
 }
